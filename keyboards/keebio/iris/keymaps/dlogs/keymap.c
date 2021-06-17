@@ -9,13 +9,29 @@ extern keymap_config_t keymap_config;
 #define _RAISE 10
 #define _ADJUST 16
 
+#define IS_MAC
+#ifdef IS_MAC
+   #define K_BOW A(KC_LEFT)
+   #define K_EOW A(KC_RIGHT)
+   #define K_BOL G(KC_LEFT)
+   #define K_EOL G(KC_RIGHT)
+#else
+   #define K_BOW C(KC_LEFT)
+   #define K_EOW C(KC_RIGHT)
+   #define K_BOL KC_HOME
+   #define K_EOL KC_END
+#endif
+
 enum custom_keycodes {
   QWERTY = SAFE_RANGE,
   LOWER,
   RAISE,
   ADJUST,
   ARROW,
-  NE
+  NE,
+  APP,
+  UPST,
+  DAO
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -29,7 +45,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_LALT,          KC_RGUI,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    LOWER,    RAISE, KC_SPC,                     KC_ENT,  LOWER,   KC_BSPC
+                                    LOWER,    RAISE, KC_SPC,                     KC_ENT,  LOWER,   RALT_T(KC_BSPC)
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
   [_NORMAN] = LAYOUT(
@@ -64,7 +80,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
     KC_GRAVE,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,                            KC_CIRC,  KC_P7,   KC_P8,    KC_P9, KC_RPRN, KC_EQL,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, _______, KC_MINS, KC_PLUS, KC_EQL,  KC_PSCR,                            _______,  KC_P4,    KC_P5,   KC_P6,  KC_PMNS, _______,
+     _______,  NE,     KC_MINS, KC_PLUS, KC_EQL,  KC_PSCR,                            _______,  KC_P4,    KC_P5,   KC_P6,  KC_PMNS, _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      _______, ARROW,   KC_LPRN, KC_LCBR, KC_LBRC, KC_BSLS,                            _______,  KC_P1,   KC_P2,   KC_P3,   KC_PPLS, _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
@@ -78,11 +94,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
      KC_F12,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                              KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-   _______,KC_EXLM, LCTL(KC_LEFT),KC_UP,LCTL(KC_RIGHT),KC_PERC,                      KC_CIRC, LCTL(KC_LEFT),KC_UP,LCTL(KC_RIGHT),KC_RPRN, _______,
+     _______, KC_EXLM, _______,  KC_UP,   _______,KC_PERC,                            KC_CIRC, K_BOW,    KC_UP,  K_EOW    ,KC_RPRN, _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, KC_MPRV, KC_LEFT, KC_DOWN, KC_RGHT, KC_HOME,                            KC_HOME,  KC_LEFT, KC_DOWN, KC_RGHT, KC_DEL, _______,
+     _______, UPST    , APP    , DAO    , _______, _______,                            K_BOL,   KC_LEFT, KC_DOWN, KC_RGHT, KC_DEL, _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, _______, KC_BSPC,  KC_DEL, KC_PGDN,  KC_END,  _______,          _______, KC_END, _______,  KC_LBRC, KC_RBRC, KC_BSLS, _______,
+     _______, KC_ENT,  KC_BSPC,  KC_DEL, KC_PGDN, _______,  _______,         _______,  K_EOL   ,_______, KC_LBRC, KC_RBRC, KC_BSLS, _______,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                     _______, _______, KC_LGUI,                   _______, _______, _______
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
@@ -147,6 +163,33 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case NE:
       if (record->event.pressed) {
         SEND_STRING("!=");
+      }
+      break;
+    case APP:
+      if (record->event.pressed) {
+         if (get_mods() && MOD_MASK_SHIFT) {
+            SEND_STRING("Application");
+         } else {
+            SEND_STRING("application");
+         }
+      }
+      break;
+    case UPST:
+      if (record->event.pressed) {
+         if (get_mods() && MOD_MASK_SHIFT) {
+            SEND_STRING("Upstart");
+         } else {
+            SEND_STRING("upstart");
+         }
+      }
+      break;
+    case DAO:
+      if (record->event.pressed) {
+         if (get_mods() && MOD_MASK_SHIFT) {
+            SEND_STRING("DepositAccountOpening");
+         } else {
+            SEND_STRING("deposit_account_opening");
+         }
       }
       break;
   }
