@@ -33,7 +33,10 @@ enum custom_keycodes {
   ARROW,
   NE,
   APP,
-  UPST
+  AAPP,
+  APPU,
+  REPO,
+  BIZ
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -84,7 +87,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      _______, KC_EXLM, _______,  KC_UP,   _______,KC_PERC,                            KC_CIRC, K_BOW,    KC_UP,  K_EOW    ,KC_RPRN, _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, UPST    , APP   , _______, _______, _______,                            K_BOL,   KC_LEFT, KC_DOWN, KC_RGHT, KC_DEL, _______,
+     _______, AAPP    , APP   , APPU    , REPO   , BIZ    ,                            K_BOL,   KC_LEFT, KC_DOWN, KC_RGHT, KC_DEL, _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      _______, KC_ENT,  KC_BSPC,  KC_DEL, KC_PGDN, _______,  _______,         _______,  K_EOL   ,_______, KC_LBRC, KC_RBRC, KC_BSLS, _______,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
@@ -143,34 +146,31 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
-    case ARROW:
-      if (record->event.pressed) {
+  }
+  if (record->event.pressed) {
+    switch(keycode) {
+      case ARROW:
         SEND_STRING("=> ");
-      }
-      break;
-    case NE:
-      if (record->event.pressed) {
+        break;
+      case NE:
         SEND_STRING("!=");
-      }
-      break;
-    case APP:
-      if (record->event.pressed) {
-         if (get_mods() && MOD_MASK_SHIFT) {
-            SEND_STRING("Application");
-         } else {
-            SEND_STRING("application");
-         }
-      }
-      break;
-    case UPST:
-      if (record->event.pressed) {
-         if (get_mods() && MOD_MASK_SHIFT) {
-            SEND_STRING("Upstart");
-         } else {
-            SEND_STRING("upstart");
-         }
-      }
-      break;
+        break;
+      case APP:
+        SEND_STRING("application");
+        break;
+      case AAPP:
+        SEND_STRING("Application");
+        break;
+      case APPU:
+        SEND_STRING("application_uuid");
+        break;
+      case REPO:
+        SEND_STRING("Repository");
+        break;
+      case BIZ:
+        SEND_STRING("business");
+        break;
+    }
   }
   return true;
 }
