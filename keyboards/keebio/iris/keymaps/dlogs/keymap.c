@@ -1,12 +1,13 @@
 #include QMK_KEYBOARD_H
 
 extern keymap_config_t keymap_config;
-
-#define _QWERTY 0
-#define _NORMAN 1
-#define _LOWER 5
-#define _RAISE 10
-#define _ADJUST 16
+enum my_layers {
+    _QWERTY,
+    _NORMAN,
+    _LOWER,
+    _RAISE,
+    _ADJUST
+};
 
 #define IS_MAC
 #ifdef IS_MAC
@@ -24,6 +25,8 @@ extern keymap_config_t keymap_config;
    #define K_LUCTRL KC_LCTL
    #define K_RUGUI KC_RGUI
 #endif
+
+#define SHO_APPS C(KC_UP) // mission control
 
 enum custom_keycodes {
   QWERTY = SAFE_RANGE,
@@ -85,7 +88,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
      KC_F12,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                              KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, KC_EXLM, _______,  KC_UP,   _______,KC_PERC,                            KC_CIRC, K_BOW,    KC_UP,  K_EOW    ,KC_RPRN, _______,
+    SHO_APPS, KC_EXLM, _______,  KC_UP,   _______,KC_PERC,                            KC_CIRC, K_BOW,    KC_UP,  K_EOW    ,KC_RPRN, _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      _______, AAPP    , APP   , APPU    , REPO   , BIZ    ,                            K_BOL,   KC_LEFT, KC_DOWN, KC_RGHT, KC_DEL, _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
