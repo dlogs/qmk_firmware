@@ -15,7 +15,7 @@ enum my_layers {
    #define K_EOW A(KC_RIGHT)
    #define K_BOL G(KC_LEFT)
    #define K_EOL G(KC_RIGHT)
-   #define K_LUCTRL KC_LGUI
+   #define K_LUCTRL LGUI_T(KC_ESC)
    #define K_RUGUI KC_RCTL
 #else
    #define K_BOW C(KC_LEFT)
@@ -51,7 +51,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
     K_LUCTRL, KC_A      ,KC_S,  KC_D,    KC_F,    KC_G,                               KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN,  KC_QUOT,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_LALT,          K_RUGUI,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
+OSM(MOD_LSFT), KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_LALT,          K_RUGUI,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, OSM(MOD_RSFT),
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                     LOWER,    RAISE, KC_SPC,                     KC_ENT,  LOWER,   RALT_T(KC_BSPC)
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
@@ -88,11 +88,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
      KC_F12,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                              KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-    SHO_APPS, KC_EXLM, _______,  KC_UP,   _______,KC_PERC,                            KC_CIRC, K_BOW,    KC_UP,  K_EOW    ,KC_RPRN, _______,
+    SHO_APPS, KC_EXLM, _______,  KC_UP,   _______,KC_PERC,                            KC_CIRC,   K_BOW,   KC_UP,  K_EOW  , KC_RPRN, _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, AAPP    , APP   , APPU    , REPO   , BIZ    ,                            K_BOL,   KC_LEFT, KC_DOWN, KC_RGHT, KC_DEL, _______,
+     _______, AAPP    , APP   , APPU    , REPO   , BIZ    ,                           K_BOL  , KC_LEFT, KC_DOWN, KC_RGHT, KC_DEL, _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, KC_ENT,  KC_BSPC,  KC_DEL, KC_PGDN, _______,  _______,         _______,  K_EOL   ,_______, KC_LBRC, KC_RBRC, KC_BSLS, _______,
+     _______, KC_ENT,  KC_BSPC,  KC_DEL, KC_PGDN, _______,  _______,         _______, K_EOL  , _______, KC_LBRC, KC_RBRC, KC_BSLS, _______,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                     _______, _______, KC_LGUI,                   _______, _______, _______
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
