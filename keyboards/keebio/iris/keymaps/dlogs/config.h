@@ -29,3 +29,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define EE_HANDS
 
 #define TAPPING_TOGGLE 2
+#define BOTH_SHIFTS_TURNS_ON_CAPS_WORD
+#define HOLD_ON_OTHER_KEY_PRESS

@@ -2,35 +2,17 @@
 
 extern keymap_config_t keymap_config;
 enum my_layers {
-    _QWERTY,
-    _NORMAN,
-    _LOWER,
-    _RAISE,
-    _ADJUST
+  _COLEMAK,
+  _QWERTY,
+  _LOWER,
+  _RAISE,
+  _ADJUST
 };
-
-#define IS_MAC
-#ifdef IS_MAC
-   #define K_BOW A(KC_LEFT)
-   #define K_EOW A(KC_RIGHT)
-   #define K_BOL G(KC_LEFT)
-   #define K_EOL G(KC_RIGHT)
-   #define K_LUCTRL KC_LGUI
-   #define K_RUGUI KC_RCTL
-#else
-   #define K_BOW C(KC_LEFT)
-   #define K_EOW C(KC_RIGHT)
-   #define K_BOL KC_HOME
-   #define K_EOL KC_END
-   #define K_LUCTRL KC_LCTL
-   #define K_RUGUI KC_RGUI
-#endif
 
 #define SHO_APPS C(KC_UP) // mission control
 
 enum custom_keycodes {
-  QWERTY = SAFE_RANGE,
-  LOWER,
+  LOWER = SAFE_RANGE,
   RAISE,
   ADJUST,
   ARROW,
@@ -39,32 +21,38 @@ enum custom_keycodes {
   AAPP,
   APPU,
   REPO,
-  BIZ
+  BIZ,
+  K_BOW,
+  K_EOW,
+  K_BOL,
+  K_EOL,
+  K_LUCTRL,
+  K_RUGUI
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  [_QWERTY] = LAYOUT(
+  [_COLEMAK] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
      KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                               KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                               KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_UNDS,
+     KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,                               KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN,  KC_UNDS,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-    K_LUCTRL, KC_A      ,KC_S,  KC_D,    KC_F,    KC_G,                               KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN,  KC_QUOT,
+    K_LUCTRL, KC_A,    KC_R,    KC_S,    KC_T,    KC_D,                               KC_H,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_LALT,          K_RUGUI,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
+     KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_LALT,          K_RUGUI,  KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                     LOWER,    RAISE, KC_SPC,                     KC_ENT,  LOWER,   RALT_T(KC_BSPC)
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
-  [_NORMAN] = LAYOUT(
+  [_QWERTY] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
      _______, _______, _______, _______, _______, _______,                           _______, _______, _______, _______, _______, _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______,  KC_Q,    KC_W,    KC_D,    KC_F,    KC_K,                               KC_J,    KC_U,    KC_R,    KC_L,   KC_SCLN, _______,
+     _______,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                               KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, KC_A,    KC_S,    KC_E,    KC_T,    KC_G,                               KC_Y,    KC_N,    KC_I,    KC_O,    KC_H,    _______,
+     _______, KC_A      ,KC_S,  KC_D,    KC_F,    KC_G,                               KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN,    _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    _______,          _______,  KC_P,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, _______,
+     _______, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    _______,          _______,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, _______,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                     _______, _______, _______,              _______,  _______,   _______
                                 // └────────┴────────┴────────┘             └────────┴────────┴────────┘
@@ -100,7 +88,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_ADJUST] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     QK_BOOT, _______, _______, _______, _______, TG(_NORMAN),                          _______, _______, _______, _______, _______, _______,
+     QK_BOOT, _______, _______, _______, _______, TG(_QWERTY),                          _______, _______, _______, _______, _______, _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      _______, _______, _______, _______, _______, _______,                            _______, _______, _______, _______, _______, _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
@@ -113,14 +101,33 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   )
 };
 
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+uint16_t mac_keycode(uint16_t keycode) {
   switch (keycode) {
-    case QWERTY:
-      if (record->event.pressed) {
-        set_single_persistent_default_layer(_QWERTY);
-      }
-      return false;
-      break;
+    case K_BOW: return A(KC_LEFT);
+    case K_EOW: return A(KC_RIGHT);
+    case K_BOL: return G(KC_LEFT);
+    case K_EOL: return G(KC_RIGHT);
+    case K_LUCTRL: return KC_LGUI;
+    case K_RUGUI: return KC_RCTL;
+  }
+  return 0;
+}
+
+uint16_t win_keycode(uint16_t keycode) {
+  switch (keycode) {
+    case K_BOW: return C(KC_LEFT);
+    case K_EOW: return C(KC_RIGHT);
+    case K_BOL: return KC_HOME;
+    case K_EOL: return KC_END;
+    case K_LUCTRL: return KC_LCTL;
+    case K_RUGUI: return KC_RGUI;
+  }
+  return 0;
+}
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  uint16_t os_key = 0;
+  switch (keycode) {
     case LOWER:
       if (record->event.pressed) {
         layer_on(_LOWER);
@@ -146,6 +153,20 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         layer_on(_ADJUST);
       } else {
         layer_off(_ADJUST);
+      }
+      return false;
+      break;
+    case K_BOW:
+    case K_EOW:
+    case K_BOL:
+    case K_EOL:
+    case K_LUCTRL:
+    case K_RUGUI:
+      os_key = (detected_host_os() == OS_WINDOWS || detected_host_os() == OS_LINUX) ? win_keycode(keycode) : mac_keycode(keycode);
+      if (record->event.pressed) {
+        register_code16(os_key);
+      } else {
+        unregister_code16(os_key);
       }
       return false;
       break;
